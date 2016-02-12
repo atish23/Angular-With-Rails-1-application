@@ -1,0 +1,29 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  pool: 5
+ 
+dev&test: &devtest
+  <<: *default
+  host: localhost
+  port: 5432
+ 
+development:
+  <<: *devtest
+  database: checkin_development
+  username: root
+  password: root
+ 
+test:
+  <<: *devtest
+  database: checkin_test
+  username: root
+  password: root
+  
+production:
+  <<: *default
+  database: checkin_production
+  url: <%= ENV["db_url"] %>
+  username: <%= ENV["db_username"] %>
+  password: <%= ENV["db_password"] %>
